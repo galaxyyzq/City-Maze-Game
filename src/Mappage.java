@@ -1,4 +1,4 @@
-package sample;
+
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -15,12 +15,12 @@ public class Mappage extends GridPane {
         this.add(start,2,2);
 
         VBox map = new VBox();
-        Image world =  new Image("./sample/worldmap.jpg");
+        Image world =  new Image("/sample/worldmap.jpg");
         ImageView imgView = new ImageView(world);
         map.getChildren().addAll(imgView);
         this.add(map,1,1);
 
-        Image userimage =  new Image("./sample/boy.png");
+        Image userimage =  new Image("/sample/boy.png");
         ImageView imageView = new ImageView(userimage);
         imageView.setFitHeight(100);
         imageView.setFitWidth(100);

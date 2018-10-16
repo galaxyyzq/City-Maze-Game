@@ -25,7 +25,7 @@ public class Launchpage extends FlowPane {
             VBox launchbox = new VBox(40);
 
             //title
-            Image titlepic =  new Image("./sample/title.png");
+            Image titlepic =  new Image("/sample/title.png");
             ImageView titleView = new ImageView(titlepic);
             VBox title = new VBox();
             title.getChildren().add(titleView);

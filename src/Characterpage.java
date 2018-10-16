@@ -44,7 +44,7 @@ public class Characterpage extends GridPane {
         leftcol.setPadding(new Insets(10, 10, 10,10));
 
         //left column - Male Button
-		Image male =  new Image("./sample/boy.png");
+		Image male =  new Image("/sample/boy.png");
 		ImageView maleView = new ImageView(male);
 		maleView.setFitHeight(50);
 		maleView.setFitWidth(50);
@@ -53,7 +53,7 @@ public class Characterpage extends GridPane {
 		MaleBtn.setId("M");
 
 		//left column - Female Button
-		Image female =  new Image("./sample/girl.png");
+		Image female =  new Image("/sample/girl.png");
 		ImageView femaleView = new ImageView(female);
 		femaleView.setFitHeight(50);
 		femaleView.setFitWidth(50);
@@ -68,7 +68,7 @@ public class Characterpage extends GridPane {
 
         //character view
 		VBox character  = new VBox();
-		Image imageboy =  new Image("./sample/boy.png");
+		Image imageboy =  new Image("/sample/boy.png");
 		ImageView imgView = new ImageView(imageboy);
 		imgView.setFitHeight(300);
 		imgView.setFitWidth(300);
@@ -83,7 +83,7 @@ public class Characterpage extends GridPane {
         rightcol.setPadding(new Insets(10, 10, 10,10));
 
         //right column - color button - 1
-        Image colorimg1 =  new Image("./sample/color1.png");
+        Image colorimg1 =  new Image("/sample/color1.png");
         ImageView colorview1 = new ImageView(colorimg1);
         colorview1.setFitHeight(30);
         colorview1.setFitWidth(70);
@@ -92,7 +92,7 @@ public class Characterpage extends GridPane {
         Color1.setId("color1");
 
         //right column - color button - 2
-        Image colorimg2 =  new Image("./sample/color2.png");
+        Image colorimg2 =  new Image("/sample/color2.png");
         ImageView colorview2 = new ImageView(colorimg2);
         colorview2.setFitHeight(30);
         colorview2.setFitWidth(70);
@@ -101,7 +101,7 @@ public class Characterpage extends GridPane {
         Color2.setId("color2");
 
         //right column - color button - 3
-        Image colorimg3 =  new Image("./sample/color3.png");
+        Image colorimg3 =  new Image("/sample/color3.png");
         ImageView colorview3 = new ImageView(colorimg3);
         colorview3.setFitHeight(30);
         colorview3.setFitWidth(70);
@@ -110,7 +110,7 @@ public class Characterpage extends GridPane {
         Color3.setId("color3");
 
         //right column - color button - 4
-        Image colorimg4 =  new Image("./sample/color4.png");
+        Image colorimg4 =  new Image("/sample/color4.png");
         ImageView colorview4 = new ImageView(colorimg4);
         colorview4.setFitHeight(30);
         colorview4.setFitWidth(70);
@@ -171,11 +171,11 @@ public class Characterpage extends GridPane {
 			@Override
 			public void handle(DragEvent event) {
 				if (event.getDragboard().getContent(DataFormat.PLAIN_TEXT).equals("M")){
-					imgView.setImage(new Image("./sample/boy.png"));
+					imgView.setImage(new Image("/sample/boy.png"));
 				}
 
 				if (event.getDragboard().getContent(DataFormat.PLAIN_TEXT).equals("F")){
-					imgView.setImage(new Image("./sample/girl.png"));
+					imgView.setImage(new Image("/sample/girl.png"));
 				}
 
 				event.consume();

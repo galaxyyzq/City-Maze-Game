@@ -1,12 +1,13 @@
-package sample;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import sample.*;
-import sun.jvm.hotspot.debugger.Page;
+import sample.Characterpage;
+import sample.Gamepage;
+import sample.Launchpage;
+import sample.Menupage;
+
 
 public class MazeApp extends Application {
 
