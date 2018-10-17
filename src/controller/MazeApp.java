@@ -3,9 +3,11 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import sample.*;
 import sample.Characterpage;
 import sample.Gamepage;
 import sample.Launchpage;
+import sample.Mappage;
 import sample.Menupage;
 
 
@@ -22,7 +24,7 @@ public class MazeApp extends Application {
         Menupage mp = new Menupage();
         Characterpage cp = new Characterpage();
         Launchpage lp = new Launchpage();
-        Mappage map = new Mappage();
+        sample.Mappage map = new Mappage();
 
         Scene GameScene = new Scene(gp,800,600);
         gp.initial();

@@ -1,6 +1,5 @@
 package sample;
 
-
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
