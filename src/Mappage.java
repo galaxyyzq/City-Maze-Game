@@ -5,12 +5,20 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 
 public class Mappage extends GridPane {
 
     public Button start = new Button("start");
 
     public void initial() {
+
+        //title of the page
+        Text choose = new Text("Choose your destination by drag and drop");
+        choose.setStyle("-fx-font: normal bold 26 Langdon; "
+                + "-fx-base: #AE3522; "
+                + "-fx-text-fill: orange;");
+        this.add(choose, 1,0);
 
         this.add(start,2,2);
 
