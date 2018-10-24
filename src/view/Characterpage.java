@@ -1,4 +1,4 @@
-package sample;
+package view;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,14 +11,29 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import controller.charactercontroller;
 
 public class Characterpage extends GridPane {
 
+
+
+
+	public Characterpage(){
+
+	}
+
 	public Button ok = new Button("OK");
 	public Button BackBtn = new Button("Back");
+	public Button MaleBtn = new Button();
+	public Button FemaleBtn;// = new Button();
+	public ImageView imgView;
 
 
 	public void initial() {
+
+
+
+		FemaleBtn = new Button();
 
 	    //back button
         VBox backcol = new VBox();
@@ -47,7 +62,6 @@ public class Characterpage extends GridPane {
 		ImageView maleView = new ImageView(male);
 		maleView.setFitHeight(50);
 		maleView.setFitWidth(50);
-		Button MaleBtn = new Button();
 		MaleBtn.setGraphic(maleView);
 		MaleBtn.setId("M");
 
@@ -56,7 +70,6 @@ public class Characterpage extends GridPane {
 		ImageView femaleView = new ImageView(female);
 		femaleView.setFitHeight(50);
 		femaleView.setFitWidth(50);
-		Button FemaleBtn = new Button();
 		FemaleBtn.setGraphic(femaleView);
 		FemaleBtn.setId("F");
 
@@ -68,7 +81,7 @@ public class Characterpage extends GridPane {
         //character view
 		VBox character  = new VBox();
 		Image imageboy =  new Image("/sample/boy.png");
-		ImageView imgView = new ImageView(imageboy);
+		imgView = new ImageView(imageboy);
 		imgView.setFitHeight(300);
 		imgView.setFitWidth(300);
 		character.getChildren().addAll(imgView);
@@ -135,52 +148,54 @@ public class Characterpage extends GridPane {
 		this.add(choose, 1,0);
 		this.add(backcol,0,0);
 
+
+
         //drag and drop function to change gender
-		FemaleBtn.setOnDragDetected(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				Dragboard db = FemaleBtn.startDragAndDrop(TransferMode.MOVE);
-				ClipboardContent content = new ClipboardContent();
-				content.putString(FemaleBtn.getId());
-				db.setContent(content);
-				event.consume();
-			}
-		});
+//		FemaleBtn.setOnDragDetected(new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent event) {
+//				Dragboard db = FemaleBtn.startDragAndDrop(TransferMode.MOVE);
+//				ClipboardContent content = new ClipboardContent();
+//				content.putString(FemaleBtn.getId());
+//				db.setContent(content);
+//				event.consume();
+//			}
+//		});
 
-		MaleBtn.setOnDragDetected(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				Dragboard db = MaleBtn.startDragAndDrop(TransferMode.MOVE);
-				ClipboardContent content = new ClipboardContent();
-				content.putString(MaleBtn.getId());
-				db.setContent(content);
-				event.consume();
-			}
-		});
-
-		imgView.setOnDragOver(new EventHandler<DragEvent>() {
-			@Override
-			public void handle(DragEvent event) {
-				event.acceptTransferModes(TransferMode.MOVE);
-				event.consume();
-			}
-		});
-
-		imgView.setOnDragDropped(new EventHandler<DragEvent>() {
-			@Override
-			public void handle(DragEvent event) {
-				if (event.getDragboard().getContent(DataFormat.PLAIN_TEXT).equals("M")){
-					imgView.setImage(new Image("/sample/boy.png"));
-				}
-
-				if (event.getDragboard().getContent(DataFormat.PLAIN_TEXT).equals("F")){
-					imgView.setImage(new Image("/sample/girl.png"));
-				}
-
-				event.consume();
-				event.setDropCompleted(true);
-			}
-		});
+//		MaleBtn.setOnDragDetected(new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent event) {
+//				Dragboard db = MaleBtn.startDragAndDrop(TransferMode.MOVE);
+//				ClipboardContent content = new ClipboardContent();
+//				content.putString(MaleBtn.getId());
+//				db.setContent(content);
+//				event.consume();
+//			}
+//		});
+//
+//		imgView.setOnDragOver(new EventHandler<DragEvent>() {
+//			@Override
+//			public void handle(DragEvent event) {
+//				event.acceptTransferModes(TransferMode.MOVE);
+//				event.consume();
+//			}
+//		});
+//
+//		imgView.setOnDragDropped(new EventHandler<DragEvent>() {
+//			@Override
+//			public void handle(DragEvent event) {
+//				if (event.getDragboard().getContent(DataFormat.PLAIN_TEXT).equals("M")){
+//					imgView.setImage(new Image("/sample/boy.png"));
+//				}
+//
+//				if (event.getDragboard().getContent(DataFormat.PLAIN_TEXT).equals("F")){
+//					imgView.setImage(new Image("/sample/girl.png"));
+//				}
+//
+//				event.consume();
+//				event.setDropCompleted(true);
+//			}
+//		});
 
 
 

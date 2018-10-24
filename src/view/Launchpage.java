@@ -1,4 +1,4 @@
-package sample;
+package view;
 
 import com.sun.tools.javadoc.Start;
 import javafx.geometry.Insets;

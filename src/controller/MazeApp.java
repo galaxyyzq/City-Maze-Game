@@ -1,14 +1,15 @@
+import controller.charactercontroller;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import sample.*;
-import sample.Characterpage;
-import sample.Gamepage;
-import sample.Launchpage;
-import sample.Mappage;
-import sample.Menupage;
+import view.*;
+import view.Characterpage;
+import view.Gamepage;
+import view.Launchpage;
+import view.Mappage;
+import view.Menupage;
 
 
 public class MazeApp extends Application {
@@ -23,8 +24,9 @@ public class MazeApp extends Application {
         Gamepage gp = new Gamepage();
         Menupage mp = new Menupage();
         Characterpage cp = new Characterpage();
+        controller.charactercontroller cpctrl = new charactercontroller(cp);
         Launchpage lp = new Launchpage();
-        sample.Mappage map = new Mappage();
+        view.Mappage map = new Mappage();
 
         Scene GameScene = new Scene(gp,800,600);
         gp.initial();
@@ -32,6 +34,7 @@ public class MazeApp extends Application {
         mp.initial();
         Scene CharacterScene = new Scene(cp,800,600);
         cp.initial();
+        cpctrl.init();
         Scene LaunchScene = new Scene(lp,800,600);
         lp.initial();
         Scene MapScene = new Scene(map,800,600);
