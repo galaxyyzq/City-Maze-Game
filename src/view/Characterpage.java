@@ -24,8 +24,12 @@ public class Characterpage extends GridPane {
 
 	public Button ok = new Button("OK");
 	public Button BackBtn = new Button("Back");
-	public Button MaleBtn = new Button();
+	public Button MaleBtn ;
 	public Button FemaleBtn;// = new Button();
+    public Button Color1 ;
+    public Button Color2 ;
+    public Button Color3 ;
+    public Button Color4 ;
 	public ImageView imgView;
 
 
@@ -34,6 +38,11 @@ public class Characterpage extends GridPane {
 
 
 		FemaleBtn = new Button();
+        MaleBtn = new Button();
+        Color1 = new Button();
+        Color2 = new Button();
+        Color3 = new Button();
+        Color4 = new Button();
 
 	    //back button
         VBox backcol = new VBox();
@@ -58,7 +67,7 @@ public class Characterpage extends GridPane {
         leftcol.setPadding(new Insets(10, 10, 10,10));
 
         //left column - Male Button
-		Image male =  new Image("/sample/boy.png");
+		Image male =  new Image("/sample/boy1.png");
 		ImageView maleView = new ImageView(male);
 		maleView.setFitHeight(50);
 		maleView.setFitWidth(50);
@@ -66,7 +75,7 @@ public class Characterpage extends GridPane {
 		MaleBtn.setId("M");
 
 		//left column - Female Button
-		Image female =  new Image("/sample/girl.png");
+		Image female =  new Image("/sample/girl1.png");
 		ImageView femaleView = new ImageView(female);
 		femaleView.setFitHeight(50);
 		femaleView.setFitWidth(50);
@@ -80,14 +89,12 @@ public class Characterpage extends GridPane {
 
         //character view
 		VBox character  = new VBox();
-		Image imageboy =  new Image("/sample/boy.png");
+		Image imageboy =  new Image("/sample/boy1.png");
 		imgView = new ImageView(imageboy);
 		imgView.setFitHeight(300);
 		imgView.setFitWidth(300);
 		character.getChildren().addAll(imgView);
 		character.setPadding(new Insets(30, 30, 30, 30));
-
-
 
 
         //right column
@@ -99,7 +106,6 @@ public class Characterpage extends GridPane {
         ImageView colorview1 = new ImageView(colorimg1);
         colorview1.setFitHeight(30);
         colorview1.setFitWidth(70);
-        Button Color1 = new Button();
         Color1.setGraphic(colorview1);
         Color1.setId("color1");
 
@@ -108,7 +114,6 @@ public class Characterpage extends GridPane {
         ImageView colorview2 = new ImageView(colorimg2);
         colorview2.setFitHeight(30);
         colorview2.setFitWidth(70);
-        Button Color2 = new Button();
         Color2.setGraphic(colorview2);
         Color2.setId("color2");
 
@@ -117,7 +122,6 @@ public class Characterpage extends GridPane {
         ImageView colorview3 = new ImageView(colorimg3);
         colorview3.setFitHeight(30);
         colorview3.setFitWidth(70);
-        Button Color3 = new Button();
         Color3.setGraphic(colorview3);
         Color3.setId("color3");
 
@@ -126,7 +130,6 @@ public class Characterpage extends GridPane {
         ImageView colorview4 = new ImageView(colorimg4);
         colorview4.setFitHeight(30);
         colorview4.setFitWidth(70);
-        Button Color4 = new Button();
         Color4.setGraphic(colorview4);
         Color4.setId("color4");
 
@@ -138,8 +141,6 @@ public class Characterpage extends GridPane {
         rightcol.getChildren().addAll(Color1,Color2,Color3,Color4);
 
 
-
-
 		//add all
 		this.add(leftcol,0,1);
 		this.add(character,1,1);
@@ -147,55 +148,6 @@ public class Characterpage extends GridPane {
         this.add(rightcol,2,1);
 		this.add(choose, 1,0);
 		this.add(backcol,0,0);
-
-
-
-        //drag and drop function to change gender
-//		FemaleBtn.setOnDragDetected(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent event) {
-//				Dragboard db = FemaleBtn.startDragAndDrop(TransferMode.MOVE);
-//				ClipboardContent content = new ClipboardContent();
-//				content.putString(FemaleBtn.getId());
-//				db.setContent(content);
-//				event.consume();
-//			}
-//		});
-
-//		MaleBtn.setOnDragDetected(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent event) {
-//				Dragboard db = MaleBtn.startDragAndDrop(TransferMode.MOVE);
-//				ClipboardContent content = new ClipboardContent();
-//				content.putString(MaleBtn.getId());
-//				db.setContent(content);
-//				event.consume();
-//			}
-//		});
-//
-//		imgView.setOnDragOver(new EventHandler<DragEvent>() {
-//			@Override
-//			public void handle(DragEvent event) {
-//				event.acceptTransferModes(TransferMode.MOVE);
-//				event.consume();
-//			}
-//		});
-//
-//		imgView.setOnDragDropped(new EventHandler<DragEvent>() {
-//			@Override
-//			public void handle(DragEvent event) {
-//				if (event.getDragboard().getContent(DataFormat.PLAIN_TEXT).equals("M")){
-//					imgView.setImage(new Image("/sample/boy.png"));
-//				}
-//
-//				if (event.getDragboard().getContent(DataFormat.PLAIN_TEXT).equals("F")){
-//					imgView.setImage(new Image("/sample/girl.png"));
-//				}
-//
-//				event.consume();
-//				event.setDropCompleted(true);
-//			}
-//		});
 
 
 

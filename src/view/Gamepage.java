@@ -22,6 +22,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import java.util.Timer;
 import java.util.TimerTask;
+import model.Character;
 
 public class Gamepage extends BorderPane {
 
@@ -33,18 +34,20 @@ public class Gamepage extends BorderPane {
     public StackPane[][] sp = new StackPane[20][20];
     private int time;
     private Label mtimer;
+    public int[][] mazeArray;
 
-    public void initial() {
+
+    public void initial(Character ch) {
 
 
         time = 60;
 
-        int[][] mazeArray = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+        mazeArray = new int[][]{{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
                 {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0},
                 {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1},
+                {1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, -1},
                 {1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0},
                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0},
                 {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
@@ -57,7 +60,7 @@ public class Gamepage extends BorderPane {
                 {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0},
                 {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0},
-                {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+                {-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
 
         GridPane gp = new GridPane();
@@ -65,11 +68,17 @@ public class Gamepage extends BorderPane {
 
         for (int i = 0; i < mazeArray.length; i++) {
             for (int j = 0; j < mazeArray[i].length; j++) {
-                mazeButton[i][j] = new Button("   ");
+                mazeButton[i][j] = new Button();
+                mazeButton[i][j].setPrefSize(30,25);
                 if (mazeArray[i][j] == 0) {
                     mazeButton[i][j].setStyle("-fx-background-color: #95CE40;");
                 } else {
                     mazeButton[i][j].setStyle("-fx-background-color: #ffffff;");
+                }
+                if(mazeArray[i][j] == -1){
+                    mazeButton[i][j].setStyle("-fx-background-color: #ffffff;");
+                    mazeButton[i][j].setGraphic(new ImageView(new Image("/sample/flag.png")));
+                    mazeButton[i][j].setPadding(new Insets(0));
                 }
                 pos[i][j] = new Label();
                 sp[i][j] = new StackPane(mazeButton[i][j], pos[i][j]);
@@ -89,8 +98,10 @@ public class Gamepage extends BorderPane {
         this.setPadding(new Insets(10, 20, 10, 20));
         this.setCenter(gp);
         this.setTop(header);
+        this.setStyle("-fx-background-color:#FFFFFF");
 
-        play();
+
+        play(ch);
     }
 
 
@@ -112,7 +123,10 @@ public class Gamepage extends BorderPane {
                     time--;
 
                     if (time == 0) {
-                        
+                        timer.cancel();
+                        Alert tim = new Alert(Alert.AlertType.CONFIRMATION);
+                        tim.setContentText("Time is up!");
+                        tim.showAndWait();
                     }
 
                 }
@@ -125,19 +139,21 @@ public class Gamepage extends BorderPane {
 
     }
 
-    public void play() {
+    public void play(Character ch) {
 
-        drawCharacter();
+        drawCharacter(ch);
         this.setOnKeyPressed(event -> {
             handle(event);
-            drawCharacter();
+            drawCharacter(ch);
         });
 
     }
 
-    public void drawCharacter() {
-        System.out.println("posx, posy"+posX+" "+posY);
-        pos[posX][posY].setGraphic(new ImageView(new Image("/sample/smallboy.png")));
+    public void drawCharacter(Character ch) {
+        ImageView avaview = new ImageView(ch.avatar);
+        avaview.setFitHeight(25);
+        avaview.setFitWidth(25);
+        pos[posX][posY].setGraphic(avaview);
     }
 
 
@@ -159,14 +175,20 @@ public class Gamepage extends BorderPane {
     }
 
     public void checkAndMove(int dx, int dy) {
+
         int x = posX + dx;
         int y = posY + dy;
-
-        if (x < 0 || x >= 20 || y < 0 || y >= 20) return;
-
-        pos[posX][posY].setGraphic(null);
-        posX = x;
-        posY = y;
+        Alert alt = new Alert(Alert.AlertType.CONFIRMATION);
+        alt.setContentText("You win!");
+        if (x < 0 || x >= 19 || y < 0 || y >= 19) return;
+        if (mazeArray[x][y]==1) {
+            pos[posX][posY].setGraphic(null);
+            posX = x;
+            posY = y;
+        }
+        if(mazeArray[x][y]==-1){
+            alt.showAndWait();
+        }
     }
 
 
