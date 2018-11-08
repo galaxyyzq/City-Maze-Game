@@ -23,6 +23,7 @@ import javafx.scene.text.Text;
 import java.util.Timer;
 import java.util.TimerTask;
 import model.Character;
+import model.Worldmap;
 
 public class Gamepage extends BorderPane {
 
@@ -71,7 +72,7 @@ public class Gamepage extends BorderPane {
                 mazeButton[i][j] = new Button();
                 mazeButton[i][j].setPrefSize(30,25);
                 if (mazeArray[i][j] == 0) {
-                    mazeButton[i][j].setStyle("-fx-background-color: #95CE40;");
+                    mazeButton[i][j].setStyle("-fx-background-color: #0FA3B1;");
                 } else {
                     mazeButton[i][j].setStyle("-fx-background-color: #ffffff;");
                 }
