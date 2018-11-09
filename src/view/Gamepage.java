@@ -1,5 +1,6 @@
 package view;
 
+import controller.MazeApp;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -21,6 +22,8 @@ import java.util.TimerTask;
 import model.Character;
 import model.Money;
 import model.Worldmap;
+import controller.MazeApp;
+
 
 public class Gamepage extends BorderPane {
 
@@ -35,6 +38,7 @@ public class Gamepage extends BorderPane {
     public Button[][] mazeButton;
     Money money;
     Worldmap worldmap;
+    Text moneytext;
 
     public Gamepage(Money money, Worldmap worldmap){
         this.money = money;
@@ -47,7 +51,7 @@ public class Gamepage extends BorderPane {
 
         time = 40;
 
-        menu.setPrefSize(100,50);
+        menu.setPrefSize(80,20);
         menu.setStyle("-fx-background-color:#FFA630");
 
 
@@ -59,7 +63,9 @@ public class Gamepage extends BorderPane {
                 mazeButton[i][j] = new Button();
                 mazeButton[i][j].setPrefSize(30,25);
                 if (worldmap.mazeArray[i][j] == 0 ) {
-                    mazeButton[i][j].setStyle("-fx-background-color: #0FA3B1;");
+                    mazeButton[i][j].setStyle("-fx-background-color: #ffffff;");
+                    mazeButton[i][j].setGraphic(new ImageView(new Image("/sample/texture.png")));
+                    mazeButton[i][j].setPadding(new Insets(0));
                 } else {
                     mazeButton[i][j].setStyle("-fx-background-color: #ffffff;");
                 }
@@ -72,34 +78,47 @@ public class Gamepage extends BorderPane {
                     mazeButton[i][j].setGraphic(new ImageView(worldmap.cityimage));
                     mazeButton[i][j].setPadding(new Insets(0));
                 }
+                if(worldmap.mazeArray[i][j] == 3){
+                    mazeButton[i][j].setGraphic(new ImageView(new Image("/sample/watch.png")));
+                    mazeButton[i][j].setPadding(new Insets(0));
+                }
                 pos[i][j] = new Label();
                 sp[i][j] = new StackPane(mazeButton[i][j], pos[i][j]);
                 gp.add(sp[i][j], i, j);
             }
         }
-        mtimer = new Label("Remain Time:\n");
-        Text moneytext = new Text("money: "+money.moneynum);
+        mtimer = new Label("Remain Time:");
+        moneytext = new Text("money: "+money.moneynum);
 
 
-        HBox header = new HBox(200);
-        header.setPrefHeight(30);
+        HBox header = new HBox(160);
+        header.setPrefHeight(40);
         header.getChildren().addAll(menu, mtimer, moneytext);
         header.getAlignment();
 
-        VBox playinst = new VBox(10);
-        Text playinsttexttitle = new Text("HOW TO PLAY");
-        Text playinsttext = new Text("A = move left" + "\n" + "D = move right" + "\n" + "S = move down"+ "\n" +"W = move up");
+
+
+        VBox playinst = new VBox(80);
+        ImageView cityview = new ImageView(worldmap.cityicon);
+        Text playinsttexttitle = worldmap.city;
+        Text playinsttext = new Text("A = move left" + "\n"
+                + "D = move right" + "\n"
+                + "S = move down"+ "\n"
+                + "W = move up"+"\n"+"\n"
+                + "Try to pick up as much"+"\n"+
+                "things as you can!"
+        );
         playinsttext.setStyle("-fx-font: normal 14 Trebuchet;"
                 + "-fx-base: #AE3522; "
                 + "-fx-text-fill: orange;");
 
-        playinsttexttitle.setStyle("-fx-font: normal bold 20 Trebuchet;"
+        playinsttexttitle.setStyle("-fx-font: normal bold 16 Trebuchet;"
                 + "-fx-base: #AE3522; "
                 + "-fx-text-fill: orange;");
-        playinst.setStyle("-fx-background-color:#FFA630");
-        playinst.setMaxHeight(20);
-        playinst.setPadding(new Insets(10,10,10,10));
-        playinst.getChildren().addAll(playinsttexttitle,playinsttext);
+        playinst.setStyle("-fx-background-color:#F5F4F4");
+        playinst.setMaxHeight(26);
+        playinst.setPadding(new Insets(80,10,80,10));
+        playinst.getChildren().addAll(cityview,playinsttexttitle,playinsttext);
         playinst.setAlignment(Pos.CENTER);
 
         this.setPadding(new Insets(10, 20, 10, 20));
@@ -124,7 +143,7 @@ public class Gamepage extends BorderPane {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            mtimer.setText("Remain Time:\n" + time);
+                            mtimer.setText("Remain Time:" + time);
 
                         }
                     });
@@ -137,9 +156,10 @@ public class Gamepage extends BorderPane {
                             Alert tim = new Alert(Alert.AlertType.CONFIRMATION);
                             tim.setContentText("Time is up!");
                             tim.showAndWait();
-                            //primaryStage.setScene(LaunchScene);
+                            Platform.exit();
 
                         });
+
 
                     }
 
@@ -204,15 +224,25 @@ public class Gamepage extends BorderPane {
             pos[posX][posY].setGraphic(null);
             mazeButton[x][y].setGraphic(null);
             money.moneynum = money.moneynum+100;
+            moneytext.setText("money: "+money.moneynum);
+
+            posX = x;
+            posY = y;
+        }
+        if (worldmap.mazeArray[x][y]==3) {
+            pos[posX][posY].setGraphic(null);
+            mazeButton[x][y].setGraphic(null);
+            time=time+20;
+            mtimer.setText("Remain Time:" + time);
             posX = x;
             posY = y;
         }
         if(worldmap.mazeArray[x][y]==-1){
             alt.showAndWait();
+            Platform.exit();
         }
     }
 
-    public void moneychange(){}
 
 
 }

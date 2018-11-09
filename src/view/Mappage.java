@@ -25,7 +25,7 @@ public class Mappage extends GridPane {
     public Button bmapf = new Button();
     Worldmap worldmap;
 
-    public void initial(Character ch) {
+    public void initial(Character ch,Worldmap worldmap) {
 
         this.add(start, 2, 3);
         this.setStyle("-fx-background-color:#FFFFFF");
@@ -112,7 +112,9 @@ public class Mappage extends GridPane {
             public void handle(DragEvent event) {
                 IVmapa.setImage(new Image("/sample/1a.png"));
                 imagebutton.setVisible(false);
-                //worldmap.city = IVmapa.getId();
+                worldmap.cityimage=new Image("/sample/ny.png");
+                worldmap.cityicon=new Image("/sample/newyork.png");
+                worldmap.city = new Text("New York");
                 event.consume();
                 event.setDropCompleted(true);
             }
@@ -130,6 +132,9 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmapb.setImage(new Image("/sample/2a.png"));
+                worldmap.cityimage=new Image("/sample/fr.png");
+                worldmap.cityicon=new Image("/sample/france.png");
+                worldmap.city = new Text("Paris");
                 imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);
@@ -148,6 +153,9 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmapc.setImage(new Image("/sample/3a.png"));
+                worldmap.cityimage=new Image("/sample/ch.png");
+                worldmap.cityicon=new Image("/sample/shanghai.png");
+                worldmap.city = new Text("Shanghai");
                 imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);
@@ -166,6 +174,9 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmapd.setImage(new Image("/sample/4a.png"));
+                worldmap.cityimage=new Image("/sample/mx.png");
+                worldmap.cityicon=new Image("/sample/mexico.png");
+                worldmap.city = new Text("Mexico");
                 imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);
@@ -185,6 +196,9 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmape.setImage(new Image("/sample/5a.png"));
+                worldmap.cityimage=new Image("/sample/eg.png");
+                worldmap.cityicon=new Image("/sample/egypt.png");
+                worldmap.city = new Text("Cairo");
                 imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);
@@ -203,6 +217,9 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmapf.setImage(new Image("/sample/6a.png"));
+                worldmap.cityimage=new Image("/sample/sd.png");
+                worldmap.cityicon=new Image("/sample/sydney.png");
+                worldmap.city = new Text("Sydney");
                 imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);

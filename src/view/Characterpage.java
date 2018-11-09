@@ -57,7 +57,7 @@ public class Characterpage extends GridPane {
         okcol.setPadding(new Insets(10, 10, 10,10));
 
         //title of the page
-        Text choose = new Text("           Simply drag and drop to choose" + "\n" + "            your character and the colour");
+        Text choose = new Text("              Drag and Drop to Choose" + "\n" + "            Your Character and the Color");
 
         choose.setStyle("-fx-font: normal italic 24 Trebuchet;"
                 + "-fx-base: #AE3522; "
@@ -73,7 +73,7 @@ public class Characterpage extends GridPane {
         maleView.setFitHeight(80);
         maleView.setFitWidth(80);
         MaleBtn.setGraphic(maleView);
-        MaleBtn.setStyle("-fx-background-color:#0FA3B1");
+        MaleBtn.setStyle("-fx-background-color:#ffffff");
         MaleBtn.setId("M");
 
         //left column - Female Button
@@ -82,13 +82,14 @@ public class Characterpage extends GridPane {
         femaleView.setFitHeight(80);
         femaleView.setFitWidth(80);
         FemaleBtn.setGraphic(femaleView);
-        FemaleBtn.setStyle("-fx-background-color:#0FA3B1");
+        FemaleBtn.setStyle("-fx-background-color:#ffffff");
         FemaleBtn.setId("F");
 
         //left column - style of buttons
         MaleBtn.setPrefSize(100,100);
         FemaleBtn.setPrefSize(100,100);
         leftcol.getChildren().addAll(MaleBtn,FemaleBtn);
+        leftcol.setSpacing(20);
 
         //character view
         VBox character  = new VBox();
@@ -111,7 +112,7 @@ public class Characterpage extends GridPane {
         colorview1.setFitWidth(80);
         Color1.setGraphic(colorview1);
         Color1.setId("color1");
-        Color1.setStyle("-fx-background-color:#0FA3B1");
+        Color1.setStyle("-fx-background-color:#ffffff");
 
         //right column - color button - 2
         Image colorimg2 =  new Image("/sample/color2.png");
@@ -120,7 +121,7 @@ public class Characterpage extends GridPane {
         colorview2.setFitWidth(80);
         Color2.setGraphic(colorview2);
         Color2.setId("color2");
-        Color2.setStyle("-fx-background-color:#0FA3B1");
+        Color2.setStyle("-fx-background-color:#ffffff");
 
         //right column - color button - 3
         Image colorimg3 =  new Image("/sample/color3.png");
@@ -129,7 +130,7 @@ public class Characterpage extends GridPane {
         colorview3.setFitWidth(80);
         Color3.setGraphic(colorview3);
         Color3.setId("color3");
-        Color3.setStyle("-fx-background-color:#0FA3B1");
+        Color3.setStyle("-fx-background-color:#ffffff");
 
         //right column - color button - 4
         Image colorimg4 =  new Image("/sample/color4.png");
@@ -138,7 +139,7 @@ public class Characterpage extends GridPane {
         colorview4.setFitWidth(80);
         Color4.setGraphic(colorview4);
         Color4.setId("color4");
-        Color4.setStyle("-fx-background-color:#0FA3B1");
+        Color4.setStyle("-fx-background-color:#ffffff");
 
         //right column - style of buttons
         Color1.setPrefSize(100,60);
@@ -146,7 +147,7 @@ public class Characterpage extends GridPane {
         Color3.setPrefSize(100,60);
         Color4.setPrefSize(100,60);
         rightcol.getChildren().addAll(Color1,Color2,Color3,Color4);
-        rightcol.setSpacing(10);
+        rightcol.setSpacing(20);
 
         //add all
         this.add(leftcol,0,1);
@@ -155,7 +156,7 @@ public class Characterpage extends GridPane {
         this.add(rightcol,2,1);
         this.add(choose, 1,0);
         this.add(backcol,0,0);
-        this.setStyle("-fx-background-color:#0FA3B1");
+        this.setStyle("-fx-background-color:#ffffff");
 
     }
 }

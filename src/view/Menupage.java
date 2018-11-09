@@ -13,7 +13,7 @@ public class Menupage extends StackPane {
 
 
     public Button cont = new Button("continue");
-    //public Button reset = new Button("reset");
+    //public Button reset = new Button("back to start");
     public Button exit = new Button("exit");
 
 
@@ -29,8 +29,6 @@ public class Menupage extends StackPane {
         VBox btnbox = new VBox(cont, exit);
         cont.setPrefSize(100,50);
         cont.setStyle("-fx-background-color:#FFA630");
-        //reset.setPrefSize(100,50);
-        //reset.setStyle("-fx-background-color:#FFA630");
         exit.setPrefSize(100,50);
         exit.setStyle("-fx-background-color:#FFA630");
         btnbox.setAlignment(Pos.CENTER);

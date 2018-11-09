@@ -24,11 +24,13 @@ public class MazeApp extends Application {
     public Character character;
     public Money money;
     public Worldmap worldmap;
+    public static Stage stage;
 
     public static void main(String[] args) { Application.launch(args); }
 
 
     public void start(Stage primaryStage) {
+        stage = primaryStage;
 
         primaryStage.setTitle("CityMaze");
 
@@ -37,7 +39,7 @@ public class MazeApp extends Application {
         Characterpage cp = new Characterpage();
         character = new Character("M", "color1", new Image("/sample/boy1.png"));
         money = new Money(0);
-        worldmap = new Worldmap("NY");
+        worldmap = new Worldmap();
         controller.charactercontroller cpctrl = new charactercontroller(cp, character);
         Launchpage lp = new Launchpage();
         view.Mappage map = new Mappage();
@@ -63,7 +65,7 @@ public class MazeApp extends Application {
         cp.ok.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
             primaryStage.setScene(MapScene);
-            map.initial(cpctrl.character);
+            map.initial(cpctrl.character,worldmap);
 
         });
 
@@ -97,6 +99,7 @@ public class MazeApp extends Application {
             primaryStage.setScene(GameScene);
 
         });
+
 
         mp.exit.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
 
