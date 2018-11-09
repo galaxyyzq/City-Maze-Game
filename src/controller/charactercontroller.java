@@ -132,8 +132,6 @@ public class charactercontroller {
                 content.putImage(new Image("/sample/color4.png"));
                 db.setContent(content);
                 character.color = cp.Color4.getId();
-                System.out.println(character.color);
-                System.out.println(character.gender);
                 setAvatar();
                 event.consume();
             }

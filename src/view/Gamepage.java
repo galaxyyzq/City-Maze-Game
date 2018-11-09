@@ -1,11 +1,10 @@
 package view;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -15,14 +14,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import java.util.Timer;
 import java.util.TimerTask;
 import model.Character;
+import model.Money;
 import model.Worldmap;
 
 public class Gamepage extends BorderPane {
@@ -35,50 +32,44 @@ public class Gamepage extends BorderPane {
     public StackPane[][] sp = new StackPane[20][20];
     private int time;
     private Label mtimer;
-    public int[][] mazeArray;
+    public Button[][] mazeButton;
+    Money money;
+    Worldmap worldmap;
+
+    public Gamepage(Money money, Worldmap worldmap){
+        this.money = money;
+        this.worldmap =worldmap;
+    }
 
 
-    public void initial(Character ch) {
+    public void initial(Character ch, Money money, Worldmap worldmap) {
 
 
-        time = 60;
+        time = 40;
 
-        mazeArray = new int[][]{{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
-                {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0},
-                {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, -1},
-                {1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0},
-                {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0},
-                {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0},
-                {1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
-                {1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0},
-                {0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0},
-                {0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0},
-                {-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+        menu.setPrefSize(100,50);
+        menu.setStyle("-fx-background-color:#FFA630");
 
 
         GridPane gp = new GridPane();
-        Button[][] mazeButton = new Button[mazeArray.length][mazeArray[1].length];
+        mazeButton = new Button[worldmap.mazeArray.length][worldmap.mazeArray[1].length];
 
-        for (int i = 0; i < mazeArray.length; i++) {
-            for (int j = 0; j < mazeArray[i].length; j++) {
+        for (int i = 0; i < worldmap.mazeArray.length; i++) {
+            for (int j = 0; j < worldmap.mazeArray[i].length; j++) {
                 mazeButton[i][j] = new Button();
                 mazeButton[i][j].setPrefSize(30,25);
-                if (mazeArray[i][j] == 0) {
+                if (worldmap.mazeArray[i][j] == 0 ) {
                     mazeButton[i][j].setStyle("-fx-background-color: #0FA3B1;");
                 } else {
                     mazeButton[i][j].setStyle("-fx-background-color: #ffffff;");
                 }
-                if(mazeArray[i][j] == -1){
+                if(worldmap.mazeArray[i][j] == -1){
                     mazeButton[i][j].setStyle("-fx-background-color: #ffffff;");
                     mazeButton[i][j].setGraphic(new ImageView(new Image("/sample/flag.png")));
+                    mazeButton[i][j].setPadding(new Insets(0));
+                }
+                if(worldmap.mazeArray[i][j] == 2){
+                    mazeButton[i][j].setGraphic(new ImageView(worldmap.cityimage));
                     mazeButton[i][j].setPadding(new Insets(0));
                 }
                 pos[i][j] = new Label();
@@ -87,22 +78,38 @@ public class Gamepage extends BorderPane {
             }
         }
         mtimer = new Label("Remain Time:\n");
-        Text money = new Text("money: 1800");
+        Text moneytext = new Text("money: "+money.moneynum);
 
 
         HBox header = new HBox(200);
         header.setPrefHeight(30);
-        header.getChildren().addAll(menu, mtimer, money);
+        header.getChildren().addAll(menu, mtimer, moneytext);
         header.getAlignment();
 
+        VBox playinst = new VBox(10);
+        Text playinsttexttitle = new Text("HOW TO PLAY");
+        Text playinsttext = new Text("A = move left" + "\n" + "D = move right" + "\n" + "S = move down"+ "\n" +"W = move up");
+        playinsttext.setStyle("-fx-font: normal 14 Trebuchet;"
+                + "-fx-base: #AE3522; "
+                + "-fx-text-fill: orange;");
+
+        playinsttexttitle.setStyle("-fx-font: normal bold 20 Trebuchet;"
+                + "-fx-base: #AE3522; "
+                + "-fx-text-fill: orange;");
+        playinst.setStyle("-fx-background-color:#FFA630");
+        playinst.setMaxHeight(20);
+        playinst.setPadding(new Insets(10,10,10,10));
+        playinst.getChildren().addAll(playinsttexttitle,playinsttext);
+        playinst.setAlignment(Pos.CENTER);
 
         this.setPadding(new Insets(10, 20, 10, 20));
         this.setCenter(gp);
         this.setTop(header);
+        this.setRight(playinst);
         this.setStyle("-fx-background-color:#FFFFFF");
 
 
-        play(ch);
+        play(ch,worldmap,money);
     }
 
 
@@ -124,10 +131,16 @@ public class Gamepage extends BorderPane {
                     time--;
 
                     if (time == 0) {
-                        timer.cancel();
-                        Alert tim = new Alert(Alert.AlertType.CONFIRMATION);
-                        tim.setContentText("Time is up!");
-                        tim.showAndWait();
+                        Platform.runLater(()->{
+
+                            timer.cancel();
+                            Alert tim = new Alert(Alert.AlertType.CONFIRMATION);
+                            tim.setContentText("Time is up!");
+                            tim.showAndWait();
+                            //primaryStage.setScene(LaunchScene);
+
+                        });
+
                     }
 
                 }
@@ -140,11 +153,11 @@ public class Gamepage extends BorderPane {
 
     }
 
-    public void play(Character ch) {
+    public void play(Character ch, Worldmap worldmap, Money money) {
 
         drawCharacter(ch);
         this.setOnKeyPressed(event -> {
-            handle(event);
+            handle(event, worldmap, money);
             drawCharacter(ch);
         });
 
@@ -158,39 +171,48 @@ public class Gamepage extends BorderPane {
     }
 
 
-    public void handle(KeyEvent e) {
+    public void handle(KeyEvent e, Worldmap worldmap, Money money) {
 
         if (e.getCode() == KeyCode.W) {
-            checkAndMove(0, -1);
+            checkAndMove(0, -1, worldmap, money);
         }
         if (e.getCode() == KeyCode.A) {
-            checkAndMove(-1, 0);
+            checkAndMove(-1, 0, worldmap, money);
         }
         if (e.getCode() == KeyCode.S) {
-            checkAndMove(0, 1);
+            checkAndMove(0, 1, worldmap, money);
         }
         if (e.getCode() == KeyCode.D) {
-            checkAndMove(1, 0);
+            checkAndMove(1, 0, worldmap,money);
         }
 
     }
 
-    public void checkAndMove(int dx, int dy) {
+    public void checkAndMove(int dx, int dy, Worldmap worldmap, Money money) {
 
         int x = posX + dx;
         int y = posY + dy;
         Alert alt = new Alert(Alert.AlertType.CONFIRMATION);
         alt.setContentText("You win!");
-        if (x < 0 || x >= 19 || y < 0 || y >= 19) return;
-        if (mazeArray[x][y]==1) {
+        if (x < 0 || x > 19 || y < 0 || y > 19) return;
+        if (worldmap.mazeArray[x][y]==1) {
             pos[posX][posY].setGraphic(null);
             posX = x;
             posY = y;
         }
-        if(mazeArray[x][y]==-1){
+        if(worldmap.mazeArray[x][y]==2){
+            pos[posX][posY].setGraphic(null);
+            mazeButton[x][y].setGraphic(null);
+            money.moneynum = money.moneynum+100;
+            posX = x;
+            posY = y;
+        }
+        if(worldmap.mazeArray[x][y]==-1){
             alt.showAndWait();
         }
     }
+
+    public void moneychange(){}
 
 
 }

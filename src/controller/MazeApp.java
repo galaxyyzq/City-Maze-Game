@@ -8,17 +8,22 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Money;
 import view.Characterpage;
 import view.Gamepage;
 import view.Launchpage;
 import view.Mappage;
 import view.Menupage;
 import model.Character;
+import model.Money;
+import model.Worldmap;
 
 
 public class MazeApp extends Application {
 
     public Character character;
+    public Money money;
+    public Worldmap worldmap;
 
     public static void main(String[] args) { Application.launch(args); }
 
@@ -27,10 +32,12 @@ public class MazeApp extends Application {
 
         primaryStage.setTitle("CityMaze");
 
-        Gamepage gp = new Gamepage();
+        Gamepage gp = new Gamepage(money,worldmap);
         Menupage mp = new Menupage();
         Characterpage cp = new Characterpage();
         character = new Character("M", "color1", new Image("/sample/boy1.png"));
+        money = new Money(0);
+        worldmap = new Worldmap("NY");
         controller.charactercontroller cpctrl = new charactercontroller(cp, character);
         Launchpage lp = new Launchpage();
         view.Mappage map = new Mappage();
@@ -63,7 +70,7 @@ public class MazeApp extends Application {
         map.start.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
             primaryStage.setScene(GameScene);
-            gp.initial(cpctrl.character);
+            gp.initial(cpctrl.character,money,worldmap);
             gp.setTime();
 
         });
@@ -83,6 +90,12 @@ public class MazeApp extends Application {
         lp.exit.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
 
                     Platform.exit();
+        });
+
+        mp.cont.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
+
+            primaryStage.setScene(GameScene);
+
         });
 
         mp.exit.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {

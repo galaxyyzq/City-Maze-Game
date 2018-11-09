@@ -30,6 +30,11 @@ public class Mappage extends GridPane {
         this.add(start, 2, 3);
         this.setStyle("-fx-background-color:#FFFFFF");
 
+        start.setPrefSize(100,50);
+        start.setStyle("-fx-background-color:#FFA630");
+
+        imagebutton.setStyle("-fx-background-color:#FFFFFF");
+
         //This is the image of the world map1
         Image map1 = new Image("/sample/1.png");
         ImageView IVmapa = new ImageView(map1);
@@ -107,7 +112,7 @@ public class Mappage extends GridPane {
             public void handle(DragEvent event) {
                 IVmapa.setImage(new Image("/sample/1a.png"));
                 imagebutton.setVisible(false);
-                worldmap.city = IVmapa.getId();
+                //worldmap.city = IVmapa.getId();
                 event.consume();
                 event.setDropCompleted(true);
             }
@@ -125,6 +130,7 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmapb.setImage(new Image("/sample/2a.png"));
+                imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);
             }
@@ -142,6 +148,7 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmapc.setImage(new Image("/sample/3a.png"));
+                imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);
             }
@@ -159,6 +166,7 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmapd.setImage(new Image("/sample/4a.png"));
+                imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);
             }
@@ -177,6 +185,7 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmape.setImage(new Image("/sample/5a.png"));
+                imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);
             }
@@ -194,6 +203,7 @@ public class Mappage extends GridPane {
             @Override
             public void handle(DragEvent event) {
                 IVmapf.setImage(new Image("/sample/6a.png"));
+                imagebutton.setVisible(false);
                 event.consume();
                 event.setDropCompleted(true);
             }
