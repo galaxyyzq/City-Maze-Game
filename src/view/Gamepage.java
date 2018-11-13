@@ -224,6 +224,7 @@ public class Gamepage extends BorderPane {
             pos[posX][posY].setGraphic(null);
             mazeButton[x][y].setGraphic(null);
             money.moneynum = money.moneynum+100;
+            worldmap.mazeArray[x][y]=1;
             moneytext.setText("money: "+money.moneynum);
 
             posX = x;
